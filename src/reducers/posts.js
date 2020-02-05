@@ -11,7 +11,8 @@ export default (state = defaultPosts, action) => {
       return {
         ...state,
         loading: false,
-        data: data.children,
+        data: [...state.data, ...data.children],
+        after: data.after,
       };
     }
 

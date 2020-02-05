@@ -1,8 +1,8 @@
 import { getPosts } from '../api';
 
-export const fetchPosts = () => ({
+export const fetchPosts = params => ({
   type: 'FETCH_POSTS',
-  payload: getPosts(),
+  payload: getPosts(params),
 });
 
 export const dismiss = id => ({

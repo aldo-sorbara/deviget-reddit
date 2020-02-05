@@ -4,8 +4,8 @@ import { CircularProgress, Drawer, IconButton, List, Typography } from '@materia
 import { ChevronLeft } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { DRAWER_WIDTH, APP_BAR_HEIGHT, POSTS_LIMIT } from '../../utils/constants';
 import { fetchPosts, dismissAll } from '../../actions';
-import { DRAWER_WIDTH, APP_BAR_HEIGHT } from '../../utils/constants';
 import Post from '../../components/Post';
 import PostDetail from '../../components/PostDetail';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -68,13 +68,12 @@ export default function Home({ open, setOpen }) {
   const isLoading = useSelector(state => state.posts.loading);
   const posts = useSelector(state => state.posts.data);
   const selectedPost = useSelector(state => state.posts.selected);
+  const after = useSelector(state => state.posts.after);
   const [readPosts, setRead] = useLocalStorage('readPosts', {});
 
   useEffect(() => {
     dispatch(fetchPosts());
   }, [dispatch]);
-
-  if (isLoading) return <CircularProgress />;
 
   return (
     <div className={classes.root}>
@@ -94,7 +93,13 @@ export default function Home({ open, setOpen }) {
             <ChevronLeft />
           </IconButton>
         </div>
-        <List className={classes.list}>
+        <List
+          className={classes.list}
+          onScroll={e => {
+            if (posts.length < POSTS_LIMIT && e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight) {
+              dispatch(fetchPosts({ after }));
+            }
+          }}>
           {posts.map(post => (
             <Post
               key={post.data.id}
@@ -104,6 +109,7 @@ export default function Home({ open, setOpen }) {
               selected={selectedPost.id === post.data.id}
             />
           ))}
+          {isLoading && <CircularProgress className={classes.loading} />}
         </List>
         <div className={classes.dismissAllButton} onClick={() => dispatch(dismissAll())}>
           Dismiss All

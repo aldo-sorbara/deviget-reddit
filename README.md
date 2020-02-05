@@ -25,6 +25,7 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - Allow click on thumbnail
 - Allow save image in gallery
 - UI Responsive
+- Pagination
 
 ## Available Scripts
 
