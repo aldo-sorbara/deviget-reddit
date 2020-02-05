@@ -23,6 +23,7 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - Allow dismiss posts
 - Allow "mark as read" post using localStorage
 - Allow click on thumbnail
+- Allow save image in gallery
 
 ## Available Scripts
 

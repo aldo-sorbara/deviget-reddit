@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
-import { Avatar, Card, CardActions, CardContent, CardHeader, Link, Typography } from '@material-ui/core/';
+import { Avatar, Card, CardActions, CardContent, CardHeader, IconButton, Link, Typography } from '@material-ui/core/';
+import { Favorite } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { API_BASE_URL } from '../../utils/constants';
 import { selectPost } from '../../actions';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -27,11 +29,15 @@ const useStyles = makeStyles(theme => ({
   hide: {
     display: 'none',
   },
+  saved: {
+    color: 'red',
+  },
 }));
 
 export default function PostDetail({ post }) {
   const classes = useStyles();
   const [loaded, setLoaded] = useState({});
+  const [savedImages, setSaved] = useLocalStorage('savedImages', {});
 
   return (
     <Card>
@@ -40,6 +46,23 @@ export default function PostDetail({ post }) {
           <Avatar aria-label="recipe" className={classes.avatar}>
             {post.author.charAt(0).toUpperCase()}
           </Avatar>
+        }
+        action={
+          <IconButton
+            aria-label="Add to favorites"
+            onClick={() => {
+              if (!loaded[post.id]) return;
+              const newImages = {
+                ...savedImages,
+                [post.id]: !savedImages[post.id] && {
+                  src: post.thumbnail,
+                  url: `${API_BASE_URL}${post.permalink}`,
+                },
+              };
+              setSaved(newImages);
+            }}>
+            <Favorite className={clsx(savedImages[post.id] && classes.saved)} />
+          </IconButton>
         }
         title={
           <Typography variant="body2" color="textSecondary" component="p">

@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CircularProgress, List } from '@material-ui/core/';
+import { CircularProgress, Drawer, List } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { fetchPosts, dismissAll } from '../../actions';
-import Post from '../Post';
-import PostDetail from '../PostDetail';
+import { DRAWER_WIDTH, APP_BAR_HEIGHT } from '../../utils/constants';
+import Post from '../../components/Post';
+import PostDetail from '../../components/PostDetail';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const useStyles = makeStyles(() => ({
@@ -14,13 +15,17 @@ const useStyles = makeStyles(() => ({
   },
   selectedItem: {
     flex: 1,
+    marginTop: APP_BAR_HEIGHT,
   },
   list: {
-    width: 400,
-    background: 'black',
-    color: 'white',
+    maxWidth: DRAWER_WIDTH,
+    flex: 1,
     height: '100vh',
     overflow: 'auto',
+    background: 'black',
+    color: 'white',
+    padding: 0,
+    cursor: 'pointer',
   },
   listContainer: {
     position: 'relative',
@@ -36,9 +41,16 @@ const useStyles = makeStyles(() => ({
     background: 'white',
     width: '100%',
   },
+  drawer: {
+    width: DRAWER_WIDTH,
+    flexShrink: 0,
+  },
+  drawerPaper: {
+    width: DRAWER_WIDTH,
+  },
 }));
 
-export default function App() {
+export default function Home() {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.posts.loading);
@@ -54,7 +66,14 @@ export default function App() {
 
   return (
     <div className={classes.root}>
-      <div className={classes.listContainer}>
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open
+        classes={{
+          paper: classes.drawerPaper,
+        }}>
         <List className={classes.list}>
           {posts.map(post => (
             <Post
@@ -69,7 +88,7 @@ export default function App() {
         <div className={classes.dismissAllButton} onClick={() => dispatch(dismissAll())}>
           Dismiss All
         </div>
-      </div>
+      </Drawer>
       <div className={classes.selectedItem}>{selectedPost.id && <PostDetail post={selectedPost} />}</div>
     </div>
   );
