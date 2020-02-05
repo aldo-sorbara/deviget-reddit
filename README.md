@@ -9,15 +9,17 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - [Reddit API](http://www.reddit.com/dev/api)
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Redux](https://redux.js.org/)
+- [Axios](https://github.com/axios/axios)
 
 ## Show your work
 
 - [commits](https://github.com/aldo-sorbara/deviget-reddit/commits)
-- [live demo](thirsty-hawking-061fbb.netlify.com)
+- [live demo](https://thirsty-hawking-061fbb.netlify.com)
 
 ## What is included (1 line per commit)
 
 - Basic React app setup
+- Fetch top 50 Reddit posts and show post detail (on click)
 
 ## Available Scripts
 
