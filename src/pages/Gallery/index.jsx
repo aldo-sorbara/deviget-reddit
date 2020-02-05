@@ -1,6 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
+import { Typography } from '@material-ui/core/';
 
 import { APP_BAR_HEIGHT } from '../../utils/constants';
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -8,6 +9,7 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
+    padding: theme.spacing(2),
   },
   title: {
     flex: 1,
@@ -28,16 +30,24 @@ export default function Gallery() {
   const classes = useStyles();
   const [savedImages] = useLocalStorage('savedImages', {});
 
+  const savedObjValues = Object.values(savedImages);
+
   return (
     <div className={classes.root}>
       <div className={clsx(classes.selectedItem)}>
-        {Object.values(savedImages).map(
-          image =>
-            image.url && (
-              <a key={`${image.url}_${image.src}`} href={image.url} target="_blank" rel="noopener noreferrer">
-                <img src={image.src} className={clsx(classes.image)} alt={image.src} />
-              </a>
-            ),
+        {savedObjValues.length ? (
+          savedObjValues.map(
+            image =>
+              image.url && (
+                <a key={`${image.url}_${image.src}`} href={image.url} target="_blank" rel="noopener noreferrer">
+                  <img src={image.src} className={clsx(classes.image)} alt={image.src} />
+                </a>
+              ),
+          )
+        ) : (
+          <Typography variant="h5" component="h2">
+            No images to display
+          </Typography>
         )}
       </div>
     </div>

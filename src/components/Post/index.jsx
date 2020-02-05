@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { Avatar, Badge, ListItem, Typography } from '@material-ui/core/';
+import { Avatar, Badge, ListItem, Tooltip, Typography } from '@material-ui/core/';
 import { DeleteOutlineOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -55,9 +55,11 @@ export default function Post({ post, read, setRead, selected }) {
           </Badge>
         </div>
       </ListItem>
-      <div className={classes.delete} onClick={() => dispatch(dismiss(post.id))}>
-        <DeleteOutlineOutlined />
-      </div>
+      <Tooltip title="Dismiss post" aria-label="dismiss-post" placement="top">
+        <div className={classes.delete} onClick={() => dispatch(dismiss(post.id))}>
+          <DeleteOutlineOutlined />
+        </div>
+      </Tooltip>
     </div>
   );
 }

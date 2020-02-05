@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import { IconButton, Typography, AppBar as MUIAppBar, Toolbar } from '@material-ui/core/';
+import { IconButton, Typography, AppBar as MUIAppBar, Toolbar, Tooltip } from '@material-ui/core/';
 import { Menu, PhotoLibraryOutlined, DescriptionOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -59,12 +59,16 @@ export default function AppBar({ open, setOpen }) {
         <Typography variant="h6" className={classes.title}>
           Reddit
         </Typography>
-        <IconButton onClick={() => history.push('/')} color="inherit">
-          <DescriptionOutlined />
-        </IconButton>
-        <IconButton onClick={() => history.push('/gallery')} color="inherit">
-          <PhotoLibraryOutlined />
-        </IconButton>
+        <Tooltip title="Posts" aria-label="Posts">
+          <IconButton onClick={() => history.push('/')} color="inherit">
+            <DescriptionOutlined />
+          </IconButton>
+        </Tooltip>
+        <Tooltip title="Gallery" aria-label="Gallery">
+          <IconButton onClick={() => history.push('/gallery')} color="inherit">
+            <PhotoLibraryOutlined />
+          </IconButton>
+        </Tooltip>
       </Toolbar>
     </MUIAppBar>
   );
