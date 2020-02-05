@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { CircularProgress, List } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { fetchPosts } from '../../actions';
+import { fetchPosts, dismissAll } from '../../actions';
 import Post from '../Post';
 import PostDetail from '../PostDetail';
 
@@ -15,9 +15,25 @@ const useStyles = makeStyles(() => ({
     flex: 1,
   },
   list: {
-    maxWidth: 400,
+    width: 400,
     background: 'black',
     color: 'white',
+    height: '100vh',
+    overflow: 'auto',
+  },
+  listContainer: {
+    position: 'relative',
+  },
+  dismissAllButton: {
+    padding: '16px 0',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    position: 'absolute',
+    bottom: 16,
+    left: 0,
+    background: 'white',
+    width: '100%',
   },
 }));
 
@@ -36,11 +52,16 @@ export default function App() {
 
   return (
     <div className={classes.root}>
-      <List className={classes.list}>
-        {posts.map(post => (
-          <Post post={post} />
-        ))}
-      </List>
+      <div className={classes.listContainer}>
+        <List className={classes.list}>
+          {posts.map(post => (
+            <Post key={post.data.id} post={post} />
+          ))}
+        </List>
+        <div className={classes.dismissAllButton} onClick={() => dispatch(dismissAll())}>
+          Dismiss All
+        </div>
+      </div>
       <div className={classes.selectedItem}>{selectedPost.id && <PostDetail post={selectedPost} />}</div>
     </div>
   );

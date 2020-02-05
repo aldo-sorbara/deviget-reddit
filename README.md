@@ -20,6 +20,7 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 
 - Basic React app setup
 - Fetch top 50 Reddit posts and show post detail (on click)
+- Allow dismiss posts
 
 ## Available Scripts
 

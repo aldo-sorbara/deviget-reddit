@@ -16,6 +16,17 @@ export default (state = defaultPosts, action) => {
       };
     }
 
+    case 'DISMISS_POST': {
+      return {
+        ...state,
+        data: state.data.filter(post => post.data.id !== action.payload.id),
+      };
+    }
+
+    case 'DISMISS_ALL': {
+      return { ...state, ...defaultPosts };
+    }
+
     case 'SELECTED_POST': {
       const { post } = action.payload;
       return {
