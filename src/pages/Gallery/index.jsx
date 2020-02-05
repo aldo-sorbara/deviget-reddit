@@ -1,8 +1,5 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import clsx from 'clsx';
-import { IconButton, Typography, AppBar, Toolbar } from '@material-ui/core/';
-import { Menu, PhotoLibraryOutlined, DescriptionOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
@@ -13,13 +10,6 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     flex: 1,
-  },
-  appBar: {
-    background: 'black',
-    transition: theme.transitions.create(['margin', 'width'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
   },
   selectedItem: {
     flex: 1,
@@ -35,28 +25,10 @@ const useStyles = makeStyles(theme => ({
 
 export default function Gallery() {
   const classes = useStyles();
-  const history = useHistory();
   const [savedImages] = useLocalStorage('savedImages', {});
 
   return (
     <div className={classes.root}>
-      {/* <AppBar position="fixed" className={clsx(classes.appBar)}>
-        <Toolbar>
-          <IconButton color="inherit" aria-label="open drawer" edge="start" className={clsx(classes.menuButton)}>
-            <Menu />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            Reddit - Image gallery
-          </Typography>
-          <IconButton onClick={() => history.push('/')} color="inherit">
-            <DescriptionOutlined />
-          </IconButton>
-          <IconButton onClick={() => history.push('/gallery')} color="inherit">
-            <PhotoLibraryOutlined />
-          </IconButton>
-        </Toolbar>
-      </AppBar> */}
-
       <div className={clsx(classes.selectedItem)}>
         {Object.values(savedImages).map(
           image =>
