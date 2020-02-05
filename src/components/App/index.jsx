@@ -6,6 +6,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { fetchPosts, dismissAll } from '../../actions';
 import Post from '../Post';
 import PostDetail from '../PostDetail';
+import useLocalStorage from '../../hooks/useLocalStorage';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -43,6 +44,7 @@ export default function App() {
   const isLoading = useSelector(state => state.posts.loading);
   const posts = useSelector(state => state.posts.data);
   const selectedPost = useSelector(state => state.posts.selected);
+  const [readPosts, setRead] = useLocalStorage('readPosts', {});
 
   useEffect(() => {
     dispatch(fetchPosts());
@@ -55,7 +57,13 @@ export default function App() {
       <div className={classes.listContainer}>
         <List className={classes.list}>
           {posts.map(post => (
-            <Post key={post.data.id} post={post} />
+            <Post
+              key={post.data.id}
+              post={post.data}
+              read={!!readPosts[post.data.id]}
+              setRead={newPost => setRead({ ...readPosts, ...newPost })}
+              selected={selectedPost.id === post.data.id}
+            />
           ))}
         </List>
         <div className={classes.dismissAllButton} onClick={() => dispatch(dismissAll())}>

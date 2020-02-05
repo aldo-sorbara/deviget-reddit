@@ -16,11 +16,13 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - [commits](https://github.com/aldo-sorbara/deviget-reddit/commits)
 - [live demo](https://thirsty-hawking-061fbb.netlify.com)
 
-## What is included (1 line per commit)
+## What is included
 
 - Basic React app setup
 - Fetch top 50 Reddit posts and show post detail (on click)
 - Allow dismiss posts
+- Allow "mark as read" post using localStorage
+- Allow click on thumbnail
 
 ## Available Scripts
 

@@ -1,19 +1,37 @@
-import React from 'react';
+import React, { useState } from 'react';
+import clsx from 'clsx';
 import { Avatar, Card, CardActions, CardContent, CardHeader, Link, Typography } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { API_BASE_URL } from '../../utils/constants';
 import { selectPost } from '../../actions';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   listItem: {
     justifyContent: 'space-between',
     cursor: 'pointer',
+  },
+  image: {
+    height: 170,
+    paddingLeft: theme.spacing(2),
+  },
+  imageNotLoaded: {
+    visibility: 'hidden',
+  },
+  avatar: {
+    backgroundColor: 'black',
+  },
+  cardActions: {
+    padding: 16,
+  },
+  hide: {
+    display: 'none',
   },
 }));
 
 export default function PostDetail({ post }) {
   const classes = useStyles();
+  const [loaded, setLoaded] = useState({});
 
   return (
     <Card>
@@ -29,8 +47,20 @@ export default function PostDetail({ post }) {
           </Typography>
         }
       />
-      <a href={post.thumbnail} target="_blank" rel="noopener noreferrer">
-        <img src={post.thumbnail} alt={post.thumbnail} />
+      <img src="/noPhoto.png" alt="no-thumbnail" className={clsx(classes.image, loaded[post.id] && classes.hide)} />
+      <a
+        href={post.thumbnail}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={clsx(!loaded[post.id] && classes.imageNotLoaded)}>
+        <img
+          src={post.thumbnail}
+          alt={post.thumbnail}
+          className={classes.image}
+          onLoad={() => {
+            setLoaded({ ...loaded, [post.id]: true });
+          }}
+        />
       </a>
       <CardContent>
         <Typography gutterBottom variant="h5" component="h2">
