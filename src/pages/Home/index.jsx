@@ -72,8 +72,10 @@ export default function Home({ open, setOpen }) {
   const [readPosts, setRead] = useLocalStorage('readPosts', {});
 
   useEffect(() => {
-    dispatch(fetchPosts());
-  }, [dispatch]);
+    if (!posts.length) {
+      dispatch(fetchPosts());
+    }
+  }, [dispatch, posts.length]);
 
   return (
     <div className={classes.root}>
@@ -96,7 +98,11 @@ export default function Home({ open, setOpen }) {
         <List
           className={classes.list}
           onScroll={e => {
-            if (posts.length < POSTS_LIMIT && e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight) {
+            if (
+              !isLoading &&
+              posts.length < POSTS_LIMIT &&
+              e.target.scrollTop + e.target.clientHeight === e.target.scrollHeight
+            ) {
               dispatch(fetchPosts({ after }));
             }
           }}>
