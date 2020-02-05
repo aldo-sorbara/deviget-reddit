@@ -20,12 +20,13 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 
 - Basic React app setup
 - Fetch top 50 Reddit posts and show post detail (on click)
-- Allow dismiss posts
+- Allow dismiss post/s
 - Allow "mark as read" post using localStorage
 - Allow click on thumbnail
 - Allow save image in gallery
 - UI Responsive
 - Pagination
+- Format date
 
 ## Available Scripts
 

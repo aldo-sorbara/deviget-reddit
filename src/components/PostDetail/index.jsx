@@ -5,7 +5,7 @@ import { Favorite } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { API_BASE_URL, DRAWER_WIDTH, APP_BAR_HEIGHT } from '../../utils/constants';
-import { selectPost } from '../../actions';
+import { formatDate } from '../../utils/formatDate';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
 const useStyles = makeStyles(theme => ({
@@ -111,7 +111,7 @@ export default function PostDetail({ post, open }) {
               {post.title}
             </Typography>
             <Typography variant="body2" color="textSecondary" component="p">
-              3 hours ago - {selectPost.num_comments} comments
+              {formatDate(post.created_utc * 1000)} - {post.num_comments} comments
             </Typography>
           </CardContent>
           <CardActions className={classes.cardActions}>
