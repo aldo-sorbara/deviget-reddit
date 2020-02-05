@@ -1,29 +1,28 @@
 import React from 'react';
 import clsx from 'clsx';
 import { useDispatch } from 'react-redux';
-import { Avatar, ListItem, Typography } from '@material-ui/core/';
+import { Avatar, Badge, ListItem, Typography } from '@material-ui/core/';
+import { DeleteOutlineOutlined } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { selectPost, dismiss } from '../../actions';
 
 const useStyles = makeStyles(() => ({
   root: {
-    padding: '8px 0',
-    borderBottom: '1px solid white',
+    background: 'black',
+    paddingTop: 16,
+    borderTop: '1px solid white',
   },
   listItem: {
     justifyContent: 'space-between',
     cursor: 'pointer',
   },
   delete: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-    padding: 8,
-    cursor: 'pointer',
-  },
-  read: {
-    opacity: 0.6,
+    'textAlign': 'center',
+    'padding': '8px 0',
+    '&:hover': {
+      opacity: 0.7,
+    },
   },
   selected: {
     background: '#292929',
@@ -49,13 +48,15 @@ export default function Post({ post, read, setRead, selected }) {
           </Typography>
         </div>
         <div>
-          <Avatar aria-label="recipe" variant="square" src={post.thumbnail}>
-            T
-          </Avatar>
+          <Badge color="secondary" variant="dot" invisible={read}>
+            <Avatar aria-label="recipe" variant="square" src={post.thumbnail}>
+              T
+            </Avatar>
+          </Badge>
         </div>
       </ListItem>
       <div className={classes.delete} onClick={() => dispatch(dismiss(post.id))}>
-        Dismiss post
+        <DeleteOutlineOutlined />
       </div>
     </div>
   );

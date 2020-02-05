@@ -4,7 +4,7 @@ import { CircularProgress, Drawer, IconButton, List, Typography } from '@materia
 import { ChevronLeft } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
-import { DRAWER_WIDTH, APP_BAR_HEIGHT, POSTS_LIMIT } from '../../utils/constants';
+import { DRAWER_WIDTH, POSTS_LIMIT } from '../../utils/constants';
 import { fetchPosts, dismissAll } from '../../actions';
 import Post from '../../components/Post';
 import PostDetail from '../../components/PostDetail';
@@ -13,10 +13,6 @@ import useLocalStorage from '../../hooks/useLocalStorage';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-  },
-  selectedItem: {
-    flex: 1,
-    marginTop: APP_BAR_HEIGHT,
   },
   list: {
     maxWidth: DRAWER_WIDTH,
@@ -121,7 +117,7 @@ export default function Home({ open, setOpen }) {
           Dismiss All
         </div>
       </Drawer>
-      <div className={classes.selectedItem}>{selectedPost.id && <PostDetail post={selectedPost} />}</div>
+      <PostDetail post={selectedPost} open={open} />
     </div>
   );
 }
