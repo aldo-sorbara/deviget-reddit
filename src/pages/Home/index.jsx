@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   dismissAllButton: {
-    padding: 16,
+    padding: theme.spacing(2),
     textAlign: 'center',
     fontWeight: 'bold',
     cursor: 'pointer',
@@ -54,7 +54,7 @@ const useStyles = makeStyles(theme => ({
   },
   sectionTitle: {
     flex: 1,
-    marginLeft: 8,
+    marginLeft: theme.spacing(1),
   },
 }));
 

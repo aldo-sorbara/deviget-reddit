@@ -7,10 +7,10 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import { selectPost, dismiss } from '../../actions';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     background: 'black',
-    paddingTop: 16,
+    paddingTop: theme.spacing(2),
     borderTop: '1px solid white',
   },
   listItem: {
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() => ({
   },
   delete: {
     'textAlign': 'center',
-    'padding': '8px 0',
+    'padding': theme.spacing(1, 0),
     '&:hover': {
       opacity: 0.7,
     },
@@ -50,7 +50,7 @@ export default function Post({ post, read, setRead, selected }) {
         <div>
           <Badge color="secondary" variant="dot" invisible={read}>
             <Avatar aria-label="recipe" variant="square" src={post.thumbnail}>
-              T
+              {post.author.charAt(0).toUpperCase()}
             </Avatar>
           </Badge>
         </div>

@@ -2,9 +2,10 @@ import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 
+import { APP_BAR_HEIGHT } from '../../utils/constants';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -13,12 +14,12 @@ const useStyles = makeStyles(() => ({
   },
   selectedItem: {
     flex: 1,
-    marginTop: 64,
+    marginTop: APP_BAR_HEIGHT,
   },
   image: {
     height: 170,
-    padding: 16,
-    margin: 16,
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
     boxShadow: '0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12)',
   },
 }));

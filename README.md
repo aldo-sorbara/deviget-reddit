@@ -10,11 +10,12 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - [Create React App](https://github.com/facebook/create-react-app)
 - [Redux](https://redux.js.org/)
 - [Axios](https://github.com/axios/axios)
+- [Netlify](https://www.netlify.com/)
 
 ## Show your work
 
-- [commits](https://github.com/aldo-sorbara/deviget-reddit/commits)
-- [live demo](https://thirsty-hawking-061fbb.netlify.com)
+- [Commits](https://github.com/aldo-sorbara/deviget-reddit/commits)
+- [Live demo](https://deviget-reddit.netlify.com)
 
 ## What is included
 

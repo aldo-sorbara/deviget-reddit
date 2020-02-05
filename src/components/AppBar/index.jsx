@@ -1,10 +1,10 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useHistory } from 'react-router-dom';
 import clsx from 'clsx';
 import { IconButton, Typography, AppBar as MUIAppBar, Toolbar } from '@material-ui/core/';
 import { Menu, PhotoLibraryOutlined, DescriptionOutlined } from '@material-ui/icons';
-import { useHistory } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
+
 import { DRAWER_WIDTH, APP_BAR_HEIGHT } from '../../utils/constants';
 
 const useStyles = makeStyles(theme => ({

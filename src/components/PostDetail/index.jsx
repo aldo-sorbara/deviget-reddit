@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: 'black',
   },
   cardActions: {
-    padding: 16,
+    padding: theme.spacing(2),
   },
   hide: {
     display: 'none',
@@ -70,7 +70,7 @@ export default function PostDetail({ post, open }) {
             }
             action={
               <IconButton
-                aria-label="Add to favorites"
+                aria-label="Add to gallery"
                 onClick={() => {
                   if (!loaded[post.id]) return;
                   const newImages = {
