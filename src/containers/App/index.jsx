@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 import AppBar from '../../components/AppBar';
@@ -17,7 +17,7 @@ export default function App() {
             <Gallery />
           </Route>
           <Route path="/">
-            <Home />
+            <Home open={open} setOpen={setOpen} />
           </Route>
         </Switch>
       </Router>

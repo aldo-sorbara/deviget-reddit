@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { CircularProgress, Drawer, List } from '@material-ui/core/';
+import { CircularProgress, Drawer, IconButton, List, Typography } from '@material-ui/core/';
+import { ChevronLeft } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 import { fetchPosts, dismissAll } from '../../actions';
@@ -9,7 +10,7 @@ import Post from '../../components/Post';
 import PostDetail from '../../components/PostDetail';
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
   },
@@ -31,15 +32,15 @@ const useStyles = makeStyles(() => ({
     position: 'relative',
   },
   dismissAllButton: {
-    padding: '16px 0',
+    padding: 16,
     textAlign: 'center',
     fontWeight: 'bold',
     cursor: 'pointer',
-    position: 'absolute',
-    bottom: 16,
-    left: 0,
-    background: 'white',
-    width: '100%',
+  },
+  loading: {
+    display: 'block',
+    margin: '8px auto',
+    color: 'white',
   },
   drawer: {
     width: DRAWER_WIDTH,
@@ -48,9 +49,20 @@ const useStyles = makeStyles(() => ({
   drawerPaper: {
     width: DRAWER_WIDTH,
   },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    padding: theme.spacing(0, 1),
+    ...theme.mixins.toolbar,
+    justifyContent: 'flex-end',
+  },
+  sectionTitle: {
+    flex: 1,
+    marginLeft: 8,
+  },
 }));
 
-export default function Home() {
+export default function Home({ open, setOpen }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const isLoading = useSelector(state => state.posts.loading);
@@ -70,10 +82,18 @@ export default function Home() {
         className={classes.drawer}
         variant="persistent"
         anchor="left"
-        open
+        open={open}
         classes={{
           paper: classes.drawerPaper,
         }}>
+        <div className={classes.drawerHeader}>
+          <Typography variant="h6" noWrap className={classes.sectionTitle}>
+            Top Posts
+          </Typography>
+          <IconButton onClick={() => setOpen(false)}>
+            <ChevronLeft />
+          </IconButton>
+        </div>
         <List className={classes.list}>
           {posts.map(post => (
             <Post

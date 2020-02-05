@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useLocation } from 'react-router-dom';
 import clsx from 'clsx';
 import { IconButton, Typography, AppBar as MUIAppBar, Toolbar } from '@material-ui/core/';

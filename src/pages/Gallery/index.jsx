@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 import useLocalStorage from '../../hooks/useLocalStorage';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
   },

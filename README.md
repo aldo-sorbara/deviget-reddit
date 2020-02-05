@@ -24,6 +24,7 @@ Your assignment is to create a simple Reddit client that shows the top 50 entrie
 - Allow "mark as read" post using localStorage
 - Allow click on thumbnail
 - Allow save image in gallery
+- UI Responsive
 
 ## Available Scripts
 
